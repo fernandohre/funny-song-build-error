@@ -62,7 +62,7 @@
       "title": "Extension Commands",
       "description": "Register VS Code commands: faaaaah.testSound, faaaaah.enable, faaaaah.disable, faaaaah.showOutputLog, faaaaah.resetSessionState.",
       "priority": 9,
-      "passes": false
+      "passes": true
     },
     {
       "id": "S10",

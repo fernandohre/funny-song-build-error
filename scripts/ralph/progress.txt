@@ -103,6 +103,19 @@ Started: Sun Mar  8 17:30:53 -03 2026
   - Call `clearAll()` in the `faaaaah.resetSessionState` command handler
 ---
 
+## 2026-03-08 - S9
+- Created `src/commands.ts` with `registerCommands()` function returning 5 disposables
+- `faaaaah.testSound`: reads current config volume and calls `player.play(volume)`
+- `faaaaah.enable` / `faaaaah.disable`: update `faaaaah.enabled` in global config and show info message
+- `faaaaah.showOutputLog`: calls `logger.show()` to reveal the output channel
+- `faaaaah.resetSessionState`: calls `session.clearAll()` and shows info message
+- Files changed: src/commands.ts
+- **Learnings for future iterations:**
+  - `registerCommands()` returns `vscode.Disposable[]`; push all into `context.subscriptions` in `activate()`
+  - Use `vscode.workspace.getConfiguration('faaaaah').update('enabled', value, vscode.ConfigurationTarget.Global)` to persist settings changes
+  - Prefix fire-and-forget promises with `void` to satisfy `@typescript-eslint/no-floating-promises`
+---
+
 ## 2026-03-08 - S8
 - Created `src/monitor.ts` with `TerminalMonitor` class
 - Subscribes to `vscode.window.onDidStartTerminalShellExecution` and `onDidEndTerminalShellExecution`
