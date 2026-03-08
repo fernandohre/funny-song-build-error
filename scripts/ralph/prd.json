@@ -13,7 +13,7 @@
       "title": "Configuration Support",
       "description": "Implement a configuration reader that exposes the extension settings: enabled (bool), cooldownMs (number), commandMatchers (string[]), errorMatchers (string[]), volume (number 0-1).",
       "priority": 2,
-      "passes": false
+      "passes": true
     },
     {
       "id": "S3",

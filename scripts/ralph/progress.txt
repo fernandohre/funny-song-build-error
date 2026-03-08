@@ -26,3 +26,12 @@ Started: Sun Mar  8 17:30:53 -03 2026
   - ESLint 8.x is used (not v9 flat config); config is in `.eslintrc.json`
   - All commands registered in package.json must also be registered in `activate()` with `vscode.commands.registerCommand` (upcoming S9 story)
 ---
+
+## 2026-03-08 - S2
+- Created `src/config.ts` with `FaaaaahConfig` interface and `getConfig()` function
+- Uses `vscode.workspace.getConfiguration('faaaaah')` to read all 5 settings with defaults
+- Files changed: src/config.ts
+- **Learnings for future iterations:**
+  - `getConfig()` in `src/config.ts` is the single source of truth for all extension settings
+  - Import `FaaaaahConfig` type and `getConfig` from `./config` in other modules
+---
