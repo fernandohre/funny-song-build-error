@@ -27,7 +27,7 @@
       "title": "Sound Player",
       "description": "Implement cross-platform sound playback using a bundled default .wav file: afplay on macOS, aplay/paplay on Linux, PowerShell SoundPlayer on Windows.",
       "priority": 4,
-      "passes": false
+      "passes": true
     },
     {
       "id": "S5",

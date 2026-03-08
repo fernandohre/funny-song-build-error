@@ -8,6 +8,8 @@ Started: Sun Mar  8 17:30:53 -03 2026
 - Extension main entry is `out/extension.js` (compiled from `src/extension.ts`)
 - All components are wired in `activate()` in `src/extension.ts`
 - Settings namespace is `faaaaah.*` (e.g. `faaaaah.enabled`, `faaaaah.cooldownMs`)
+- Bundled sound file lives at `media/error.wav`; access it with `context.asAbsolutePath(path.join('media', 'error.wav'))`
+- `SoundPlayer` requires `vscode.ExtensionContext` (for asset path) and `Logger`; instantiate once in `activate()` and pass to other components
 
 ---
 
@@ -44,4 +46,20 @@ Started: Sun Mar  8 17:30:53 -03 2026
   - `Logger` is instantiated once in `activate()` and passed to other components
   - Call `logger.dispose()` in `deactivate()` or use it as a disposable subscription
   - Use `logger.show()` to reveal the output panel (e.g. for the `faaaaah.showOutputLog` command)
+---
+
+## 2026-03-08 - S4
+- Created `src/player.ts` with `SoundPlayer` class for cross-platform WAV playback
+  - macOS: `afplay -v {volume} {file}` (supports 0–1 volume float)
+  - Linux: `paplay {file}` with fallback to `aplay {file}` on error
+  - Windows: PowerShell `(New-Object Media.SoundPlayer '{file}').PlaySync()`
+  - All playback is fire-and-forget (detached child processes, `.unref()`)
+- Generated `media/error.wav` — a 0.6s, 440Hz sine wave tone with fade-out (44100Hz/16-bit PCM mono)
+- Files changed: src/player.ts, media/error.wav
+- **Learnings for future iterations:**
+  - Use `context.asAbsolutePath(path.join('media', 'error.wav'))` to resolve the bundled sound path
+  - `cp.spawn(..., { detached: true, stdio: 'ignore' }).unref()` is the correct pattern for fire-and-forget child processes in a VS Code extension
+  - Linux `paplay` error event fires if binary is missing; use `.on('error', ...)` to detect and fall back
+  - Windows PowerShell approach does NOT support volume; volume is macOS-only via `afplay -v`
+  - The WAV file must be listed outside `.vscodeignore` (or included explicitly) to be bundled in the extension package
 ---
