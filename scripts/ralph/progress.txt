@@ -1,0 +1,28 @@
+# Ralph Progress Log
+Started: Sun Mar  8 17:30:53 -03 2026
+---
+
+## Codebase Patterns
+- `tsc -p ./` is the compile command; lint is `eslint src`
+- ESLint rule `@typescript-eslint/no-unused-vars` needs `argsIgnorePattern: "^_"` to allow intentionally-unused parameters prefixed with `_`
+- Extension main entry is `out/extension.js` (compiled from `src/extension.ts`)
+- All components are wired in `activate()` in `src/extension.ts`
+- Settings namespace is `faaaaah.*` (e.g. `faaaaah.enabled`, `faaaaah.cooldownMs`)
+
+---
+
+## 2026-03-08 - S1
+- Initialized git repo and created branch `ralph/faaaaah-extension`
+- Created `prd.json` with 10 user stories for the Faaaaah VS Code extension
+- Created extension scaffold: `package.json`, `tsconfig.json`, `.eslintrc.json`, `.vscodeignore`, `.gitignore`, `src/extension.ts`
+- Extension activates on `onStartupFinished` with a minimal activate/deactivate stub
+- Configured all 5 extension settings in `package.json` contributes.configuration
+- Registered all 5 commands in `package.json` contributes.commands
+- Files changed: package.json, tsconfig.json, .eslintrc.json, .vscodeignore, .gitignore, src/extension.ts, scripts/ralph/prd.json
+- **Learnings for future iterations:**
+  - TypeScript `module: "Node16"` is required for VS Code extensions (not CommonJS)
+  - `@types/vscode` version must match the `engines.vscode` version in package.json
+  - Unused parameters in activate() should be prefixed with `_` (e.g. `_context`)
+  - ESLint 8.x is used (not v9 flat config); config is in `.eslintrc.json`
+  - All commands registered in package.json must also be registered in `activate()` with `vscode.commands.registerCommand` (upcoming S9 story)
+---

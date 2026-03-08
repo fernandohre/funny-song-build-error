@@ -6,7 +6,7 @@
       "title": "Project Setup",
       "description": "Initialize VS Code extension project with TypeScript, package.json, tsconfig, eslint, and basic extension entry point that activates/deactivates cleanly.",
       "priority": 1,
-      "passes": false
+      "passes": true
     },
     {
       "id": "S2",
