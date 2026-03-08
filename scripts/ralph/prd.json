@@ -69,7 +69,7 @@
       "title": "Extension Activation and Wiring",
       "description": "Wire all components in the activate() entry point. Ensure the extension deactivates cleanly (disposes subscriptions). Add a bundled default error sound file.",
       "priority": 10,
-      "passes": false
+      "passes": true
     }
   ]
 }

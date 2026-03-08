@@ -116,6 +116,19 @@ Started: Sun Mar  8 17:30:53 -03 2026
   - Prefix fire-and-forget promises with `void` to satisfy `@typescript-eslint/no-floating-promises`
 ---
 
+## 2026-03-08 - S10
+- Wired all components in `activate()` in `src/extension.ts`
+- Instantiation order: Logger → SoundPlayer(context, logger) → CommandClassifier(logger) → OutputMatcher(logger) → ErrorSessionState(logger) → TerminalMonitor → registerCommands
+- All instances pushed to `context.subscriptions` for automatic disposal
+- `deactivate()` left empty; VS Code handles subscription disposal
+- Files changed: src/extension.ts
+- **Learnings for future iterations:**
+  - `SoundPlayer` constructor takes `(context: vscode.ExtensionContext, logger: Logger)` — not a raw path string
+  - `ErrorSessionState` constructor takes `logger: Logger` — not zero args
+  - `CommandClassifier` and `OutputMatcher` both take `logger: Logger`
+  - Push `logger`, `monitor`, and spread `commandDisposables` into `context.subscriptions`; no manual cleanup needed in `deactivate()`
+---
+
 ## 2026-03-08 - S8
 - Created `src/monitor.ts` with `TerminalMonitor` class
 - Subscribes to `vscode.window.onDidStartTerminalShellExecution` and `onDidEndTerminalShellExecution`
