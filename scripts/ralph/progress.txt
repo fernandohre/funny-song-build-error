@@ -35,3 +35,13 @@ Started: Sun Mar  8 17:30:53 -03 2026
   - `getConfig()` in `src/config.ts` is the single source of truth for all extension settings
   - Import `FaaaaahConfig` type and `getConfig` from `./config` in other modules
 ---
+
+## 2026-03-08 - S3
+- Created `src/logger.ts` with `Logger` class wrapping a VS Code output channel named `faaaaah`
+- Exposes `log()`, `info()`, `warn()`, `error()`, `show()`, and `dispose()` methods
+- Files changed: src/logger.ts
+- **Learnings for future iterations:**
+  - `Logger` is instantiated once in `activate()` and passed to other components
+  - Call `logger.dispose()` in `deactivate()` or use it as a disposable subscription
+  - Use `logger.show()` to reveal the output panel (e.g. for the `faaaaah.showOutputLog` command)
+---

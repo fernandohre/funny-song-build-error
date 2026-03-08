@@ -20,7 +20,7 @@
       "title": "Logger",
       "description": "Implement an output channel logger (faaaaah.logger) with log/info/warn/error methods used throughout the extension for trigger reasons and skipped cases.",
       "priority": 3,
-      "passes": false
+      "passes": true
     },
     {
       "id": "S4",
