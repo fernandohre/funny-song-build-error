@@ -10,6 +10,7 @@ Started: Sun Mar  8 17:30:53 -03 2026
 - Settings namespace is `faaaaah.*` (e.g. `faaaaah.enabled`, `faaaaah.cooldownMs`)
 - Bundled sound file lives at `media/error.wav`; access it with `context.asAbsolutePath(path.join('media', 'error.wav'))`
 - `SoundPlayer` requires `vscode.ExtensionContext` (for asset path) and `Logger`; instantiate once in `activate()` and pass to other components
+- In terminal shell execution events, `terminal` is on the event (`e.terminal`), not on `e.execution`; `TerminalShellExecution.read()` yields chunks (split by `\n` to get lines)
 
 ---
 
@@ -100,4 +101,19 @@ Started: Sun Mar  8 17:30:53 -03 2026
   - Terminal ID should be a stable string per terminal (e.g. terminal name or processId as string)
   - Call `clearSession(terminalId)` when a new watched command starts so errors from fresh runs aren't blocked by prior cooldown
   - Call `clearAll()` in the `faaaaah.resetSessionState` command handler
+---
+
+## 2026-03-08 - S8
+- Created `src/monitor.ts` with `TerminalMonitor` class
+- Subscribes to `vscode.window.onDidStartTerminalShellExecution` and `onDidEndTerminalShellExecution`
+- On start: reads config, checks `enabled`, classifies command, clears session, reads output stream asynchronously
+- For each output chunk split into lines, checks `OutputMatcher`; if match, checks `ErrorSessionState.shouldTrigger`, then plays sound
+- On end: logs command and exit code
+- Exposes `start()` and `dispose()` for lifecycle management
+- Files changed: src/monitor.ts
+- **Learnings for future iterations:**
+  - `terminal` is a property of the event object (`e.terminal`), NOT of `e.execution` — `TerminalShellExecution` has no `.terminal` property
+  - `execution.read()` returns `AsyncIterable<string>` — chunks may contain multiple lines separated by `\n`
+  - Read config fresh at start of each watched execution (via `getConfig()`); pass snapshot to async reader
+  - `TerminalMonitor` must be instantiated in `activate()` with all dependencies; call `start()` to attach listeners; `dispose()` for cleanup
 ---

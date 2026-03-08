@@ -55,7 +55,7 @@
       "title": "Terminal Monitor",
       "description": "Listen to VS Code terminal shell execution events (onDidStartTerminalShellExecution, onDidEndTerminalShellExecution) and read raw terminal output to drive the error detection pipeline.",
       "priority": 8,
-      "passes": false
+      "passes": true
     },
     {
       "id": "S9",
