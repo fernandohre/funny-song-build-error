@@ -63,3 +63,15 @@ Started: Sun Mar  8 17:30:53 -03 2026
   - Windows PowerShell approach does NOT support volume; volume is macOS-only via `afplay -v`
   - The WAV file must be listed outside `.vscodeignore` (or included explicitly) to be bundled in the extension package
 ---
+
+## 2026-03-08 - S5
+- Created `src/classifier.ts` with `CommandClassifier` class
+- `isWatchedCommand(command, customMatchers)` checks if a terminal command matches watched patterns
+- Default matchers cover npm/pnpm/yarn dev/build, vite, next dev/build, react-scripts start/build
+- When `customMatchers` is non-empty, defaults are replaced entirely (user takes full control)
+- Logs match reason or skip reason via `Logger`
+- Files changed: src/classifier.ts
+- **Learnings for future iterations:**
+  - `CommandClassifier` is instantiated once in `activate()` and passed to the Terminal Monitor
+  - Call `classifier.isWatchedCommand(cmd, getConfig().commandMatchers)` to check a command
+---

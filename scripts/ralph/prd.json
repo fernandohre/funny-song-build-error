@@ -34,7 +34,7 @@
       "title": "Command Classifier",
       "description": "Implement a command classifier that identifies watched terminal commands: npm run dev/build, pnpm dev/build, yarn dev/build, vite, next dev/build, react-scripts start/build. Must be configurable via commandMatchers setting.",
       "priority": 5,
-      "passes": false
+      "passes": true
     },
     {
       "id": "S6",
