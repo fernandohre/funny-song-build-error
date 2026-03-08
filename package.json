@@ -1,0 +1,138 @@
+{
+  "name": "faaaaah",
+  "displayName": "Faaaaah",
+  "description": "Plays a dramatic sound when a watched React build or dev command produces an error.",
+  "version": "0.0.1",
+  "publisher": "faaaaah",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "build",
+    "error",
+    "sound",
+    "alert",
+    "react"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "faaaaah.testSound",
+        "title": "Faaaaah: Test Sound"
+      },
+      {
+        "command": "faaaaah.enable",
+        "title": "Faaaaah: Enable"
+      },
+      {
+        "command": "faaaaah.disable",
+        "title": "Faaaaah: Disable"
+      },
+      {
+        "command": "faaaaah.showOutputLog",
+        "title": "Faaaaah: Show Output Log"
+      },
+      {
+        "command": "faaaaah.resetSessionState",
+        "title": "Faaaaah: Reset Session State"
+      }
+    ],
+    "configuration": {
+      "title": "Faaaaah",
+      "properties": {
+        "faaaaah.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the Faaaaah extension."
+        },
+        "faaaaah.cooldownMs": {
+          "type": "number",
+          "default": 5000,
+          "description": "Minimum milliseconds between sound triggers per terminal session."
+        },
+        "faaaaah.commandMatchers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "npm run dev",
+            "npm run build",
+            "pnpm dev",
+            "pnpm build",
+            "pnpm run dev",
+            "pnpm run build",
+            "yarn dev",
+            "yarn build",
+            "yarn run dev",
+            "yarn run build",
+            "vite",
+            "next dev",
+            "next build",
+            "react-scripts start",
+            "react-scripts build"
+          ],
+          "description": "Command substrings that trigger error monitoring."
+        },
+        "faaaaah.errorMatchers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "ERROR",
+            "Error:",
+            "error TS",
+            "Failed to compile",
+            "Build failed",
+            "error:",
+            "SyntaxError",
+            "ReferenceError",
+            "TypeError",
+            "Cannot find module",
+            "Module not found",
+            "ENOENT",
+            "✘",
+            "✗",
+            "[vite] error",
+            "webpack compiled with"
+          ],
+          "description": "Output substrings that indicate a build/dev error."
+        },
+        "faaaaah.volume": {
+          "type": "number",
+          "default": 1.0,
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Playback volume (0.0 to 1.0)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vscode/test-cli": "^0.0.6",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  }
+}
