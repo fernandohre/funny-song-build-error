@@ -41,7 +41,7 @@
       "title": "Output Matcher",
       "description": "Implement output matching against configurable error patterns (errorMatchers). Patterns should match common React/Vite/Next.js error output lines.",
       "priority": 6,
-      "passes": false
+      "passes": true
     },
     {
       "id": "S7",

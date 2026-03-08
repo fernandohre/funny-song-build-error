@@ -75,3 +75,15 @@ Started: Sun Mar  8 17:30:53 -03 2026
   - `CommandClassifier` is instantiated once in `activate()` and passed to the Terminal Monitor
   - Call `classifier.isWatchedCommand(cmd, getConfig().commandMatchers)` to check a command
 ---
+
+## 2026-03-08 - S6
+- Created `src/matcher.ts` with `OutputMatcher` class
+- `matchesError(line, customMatchers)` checks if a terminal output line matches error patterns
+- Default matchers cover: TypeScript errors, SyntaxError/TypeError/ReferenceError, React "Failed to compile"/"Module not found", Vite "Build failed"/"[vite] error", Next.js "[ error ]", generic "Error:", npm/pnpm ERR!
+- When `customMatchers` is non-empty, defaults are replaced entirely (same convention as `CommandClassifier`)
+- Files changed: src/matcher.ts
+- **Learnings for future iterations:**
+  - `OutputMatcher` is instantiated once in `activate()` and passed to the Terminal Monitor
+  - Call `matcher.matchesError(line, getConfig().errorMatchers)` per output line
+  - Same pattern as CommandClassifier: custom matchers fully replace defaults when non-empty
+---
