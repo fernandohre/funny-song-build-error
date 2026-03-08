@@ -87,3 +87,17 @@ Started: Sun Mar  8 17:30:53 -03 2026
   - Call `matcher.matchesError(line, getConfig().errorMatchers)` per output line
   - Same pattern as CommandClassifier: custom matchers fully replace defaults when non-empty
 ---
+
+## 2026-03-08 - S7
+- Created `src/session.ts` with `ErrorSessionState` class
+- Tracks per-terminal error sessions using a `Map<string, SessionEntry>` keyed by terminal ID
+- `shouldTrigger(terminalId, cooldownMs)` returns true if not in cooldown and records the trigger time
+- `clearSession(terminalId)` clears state for one terminal (e.g., when a new command starts)
+- `clearAll()` resets all sessions (used by `faaaaah.resetSessionState` command)
+- Files changed: src/session.ts
+- **Learnings for future iterations:**
+  - `ErrorSessionState` is instantiated once in `activate()` and passed to the Terminal Monitor
+  - Terminal ID should be a stable string per terminal (e.g. terminal name or processId as string)
+  - Call `clearSession(terminalId)` when a new watched command starts so errors from fresh runs aren't blocked by prior cooldown
+  - Call `clearAll()` in the `faaaaah.resetSessionState` command handler
+---

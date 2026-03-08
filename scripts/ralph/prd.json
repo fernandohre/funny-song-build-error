@@ -48,7 +48,7 @@
       "title": "Error Session State",
       "description": "Implement per-terminal error session tracking with cooldown to avoid repeated sound triggers for the same persistent error burst.",
       "priority": 7,
-      "passes": false
+      "passes": true
     },
     {
       "id": "S8",
