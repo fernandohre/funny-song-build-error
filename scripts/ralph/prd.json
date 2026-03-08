@@ -1,0 +1,75 @@
+{
+  "branchName": "ralph/faaaaah-extension",
+  "userStories": [
+    {
+      "id": "S1",
+      "title": "Project Setup",
+      "description": "Initialize VS Code extension project with TypeScript, package.json, tsconfig, eslint, and basic extension entry point that activates/deactivates cleanly.",
+      "priority": 1,
+      "passes": false
+    },
+    {
+      "id": "S2",
+      "title": "Configuration Support",
+      "description": "Implement a configuration reader that exposes the extension settings: enabled (bool), cooldownMs (number), commandMatchers (string[]), errorMatchers (string[]), volume (number 0-1).",
+      "priority": 2,
+      "passes": false
+    },
+    {
+      "id": "S3",
+      "title": "Logger",
+      "description": "Implement an output channel logger (faaaaah.logger) with log/info/warn/error methods used throughout the extension for trigger reasons and skipped cases.",
+      "priority": 3,
+      "passes": false
+    },
+    {
+      "id": "S4",
+      "title": "Sound Player",
+      "description": "Implement cross-platform sound playback using a bundled default .wav file: afplay on macOS, aplay/paplay on Linux, PowerShell SoundPlayer on Windows.",
+      "priority": 4,
+      "passes": false
+    },
+    {
+      "id": "S5",
+      "title": "Command Classifier",
+      "description": "Implement a command classifier that identifies watched terminal commands: npm run dev/build, pnpm dev/build, yarn dev/build, vite, next dev/build, react-scripts start/build. Must be configurable via commandMatchers setting.",
+      "priority": 5,
+      "passes": false
+    },
+    {
+      "id": "S6",
+      "title": "Output Matcher",
+      "description": "Implement output matching against configurable error patterns (errorMatchers). Patterns should match common React/Vite/Next.js error output lines.",
+      "priority": 6,
+      "passes": false
+    },
+    {
+      "id": "S7",
+      "title": "Error Session State",
+      "description": "Implement per-terminal error session tracking with cooldown to avoid repeated sound triggers for the same persistent error burst.",
+      "priority": 7,
+      "passes": false
+    },
+    {
+      "id": "S8",
+      "title": "Terminal Monitor",
+      "description": "Listen to VS Code terminal shell execution events (onDidStartTerminalShellExecution, onDidEndTerminalShellExecution) and read raw terminal output to drive the error detection pipeline.",
+      "priority": 8,
+      "passes": false
+    },
+    {
+      "id": "S9",
+      "title": "Extension Commands",
+      "description": "Register VS Code commands: faaaaah.testSound, faaaaah.enable, faaaaah.disable, faaaaah.showOutputLog, faaaaah.resetSessionState.",
+      "priority": 9,
+      "passes": false
+    },
+    {
+      "id": "S10",
+      "title": "Extension Activation and Wiring",
+      "description": "Wire all components in the activate() entry point. Ensure the extension deactivates cleanly (disposes subscriptions). Add a bundled default error sound file.",
+      "priority": 10,
+      "passes": false
+    }
+  ]
+}
